@@ -11,8 +11,12 @@ config_version=4
 [application]
 
 config/name="GameNETMakeAvatar"
-run/main_scene="res://Control.tscn"
+run/main_scene="res://Loading_DB.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Globals="*res://globals.gd"
 
 [physics]
 
