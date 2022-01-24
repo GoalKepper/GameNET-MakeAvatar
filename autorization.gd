@@ -14,10 +14,8 @@ func _ready():
 
 
 func _on_Button_pressed():
-	#nick = JavaScript.eval('prompt("%s", "%s");' % ['Введите ник', ""])
-	#password = JavaScript.eval('prompt("%s", "%s");' % ['Введите пароль', ""])
-	nick = "night_glider"
-	password = "admin"
+	nick = JavaScript.eval('prompt("%s", "%s");' % ['Введите ник', ""])
+	password = JavaScript.eval('prompt("%s", "%s");' % ['Введите пароль', ""])
 	for element in Globals.json:
 		if Globals.json[element]["nick"] == nick and Globals.json[element]["password"] == password:
 			Globals.avatar_id = element
