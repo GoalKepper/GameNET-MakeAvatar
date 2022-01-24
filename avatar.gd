@@ -1,6 +1,6 @@
 extends Node2D
 
-var nick:String = "Hi, dude"
+var nick:String = "Hi, dude" setget nick_set
 var messages:Array = ["привет"]
 var text_speed:float
 var randomize_messages:bool
@@ -16,21 +16,18 @@ var ghost:bool
 func _ready():
 	pass
 
-func initialize (nick, area_radius, first_message_differ, ghost, messages, randomize_messages, run_frequency, speed, text_speed, color):
-	nick = nick
-	area_radius = area_radius
-	first_message_differ = first_message_differ
-	ghost = ghost
-	messages = messages
-	randomize_messages = randomize_messages
-	run_frequency = run_frequency
-	speed = speed
-	text_speed = text_speed
+func initialize (Nick, Area_radius, First_message_differ, Ghost, Messages, Randomize_messages, Run_frequency, Speed, Text_speed, color):
+	nick_set(Nick)
+	area_radius = Area_radius
+	first_message_differ = First_message_differ
+	ghost = Ghost
+	messages = Messages
+	randomize_messages = Randomize_messages
+	run_frequency = Run_frequency
+	speed = Speed
+	text_speed = Text_speed
 	modulate = color
-	# --------------------------------------- #
+
+func nick_set(Nick):
+	nick = Nick
 	$Node2D/Label.text = nick
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

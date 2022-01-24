@@ -1,15 +1,27 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Avatar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://control.gd" type="Script" id=2]
+[ext_resource path="res://5z5.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+font_data = ExtResource( 3 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = SubResource( 2 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HTTPSet" type="HTTPRequest" parent="."]
+timeout = 10
 
 [node name="Panel" type="Panel" parent="."]
 anchor_top = 0.3
@@ -27,13 +39,96 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
-margin_right = 57.0
-margin_bottom = 20.0
+margin_right = 226.0
+margin_bottom = 118.0
 
-[node name="Button" type="Button" parent="Panel/ScrollContainer/VBoxContainer"]
-margin_right = 57.0
-margin_bottom = 20.0
-text = "ZZzzzZ"
+[node name="Nick" type="HBoxContainer" parent="Panel/ScrollContainer/VBoxContainer"]
+margin_right = 226.0
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Nick_Label" type="Label" parent="Panel/ScrollContainer/VBoxContainer/Nick"]
+margin_top = 3.0
+margin_right = 96.0
+margin_bottom = 24.0
+text = "Твой ник -"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Nick_Button" type="Button" parent="Panel/ScrollContainer/VBoxContainer/Nick"]
+margin_left = 100.0
+margin_right = 189.0
+margin_bottom = 27.0
+text = "Default"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Color" type="HBoxContainer" parent="Panel/ScrollContainer/VBoxContainer"]
+margin_top = 31.0
+margin_right = 226.0
+margin_bottom = 58.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Color_Label" type="Label" parent="Panel/ScrollContainer/VBoxContainer/Color"]
+margin_top = 3.0
+margin_right = 120.0
+margin_bottom = 24.0
+text = "Выбор цвета"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Color_Button" type="Button" parent="Panel/ScrollContainer/VBoxContainer/Color"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 27.0
+text = "Тут"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Messages_Label" type="Label" parent="Panel/ScrollContainer/VBoxContainer"]
+margin_top = 62.0
+margin_right = 226.0
+margin_bottom = 83.0
+text = "Сообщения"
+
+[node name="Messages" type="VBoxContainer" parent="Panel/ScrollContainer/VBoxContainer"]
+margin_top = 87.0
+margin_right = 226.0
+margin_bottom = 87.0
+
+[node name="Save" type="HBoxContainer" parent="Panel/ScrollContainer/VBoxContainer"]
+margin_top = 91.0
+margin_right = 226.0
+margin_bottom = 118.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Save_Label" type="Label" parent="Panel/ScrollContainer/VBoxContainer/Save"]
+margin_top = 3.0
+margin_right = 99.0
+margin_bottom = 24.0
+text = "Сохранить"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Save_Button" type="Button" parent="Panel/ScrollContainer/VBoxContainer/Save"]
+margin_left = 103.0
+margin_right = 226.0
+margin_bottom = 27.0
+text = "да, прям все"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Panel2" type="Panel" parent="."]
 anchor_right = 1.0
@@ -55,4 +150,17 @@ __meta__ = {
 [node name="Avatar" parent="Panel2/Control" instance=ExtResource( 1 )]
 scale = Vector2( 5, 5 )
 
-[connection signal="pressed" from="Panel/ScrollContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[node name="ColorPicker" type="ColorPicker" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="request_completed" from="HTTPSet" to="." method="_on_HTTPSet_request_completed"]
+[connection signal="pressed" from="Panel/ScrollContainer/VBoxContainer/Nick/Nick_Button" to="." method="_on_Nick_Button_pressed"]
+[connection signal="pressed" from="Panel/ScrollContainer/VBoxContainer/Color/Color_Button" to="." method="_on_Color_Button_pressed"]
+[connection signal="pressed" from="Panel/ScrollContainer/VBoxContainer/Save/Save_Button" to="." method="_on_Save_Button_pressed"]
+[connection signal="color_changed" from="ColorPicker" to="." method="_on_ColorPicker_color_changed"]
